@@ -5,7 +5,7 @@ from .models import Film, Director
 
 
 def index_view(request):
-    return HttpResponse('<h1>Welcome to afisha of films<h1/>')
+    return render(request, 'index.html')
 
 
 def about_us_view(request):
