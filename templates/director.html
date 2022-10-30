@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ director.name }}</title>
+</head>
+<body>
+{#{% for dir in directors %}#}
+{#    <h1>Director: {{ dir }}</h1>#}
+{##}
+{#{% endfor %}#}
+<h1>Director: {{ director.name }}</h1>
+{% for film in director.director.all %}
+<h1>Title: {{ film.title }}
+<br>
+Rate: {{ film.rating }}
+<br>
+Producer: {{ film.producer }}</h1>
+    <hr>
+{% endfor %}
+</body>
+</html>

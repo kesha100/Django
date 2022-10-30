@@ -1,15 +1,15 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 import datetime
-from .models import Film
+from .models import Film, Director
 
 
 def index_view(request):
-    return HttpResponse('<h1>Welcome<h1/>')
+    return HttpResponse('<h1>Welcome to afisha of films<h1/>')
 
 
 def about_us_view(request):
-    return render(request , 'about_us.html')
+    return render(request, 'about_us.html')
 
 
 def date_now_view(request):
@@ -30,8 +30,20 @@ def film_detail_view(request, id):
     dict_ = {}
     try:
         film = Film.objects.get(id=id)
+
     except Film.DoesNotExist:
         raise Http404('Film not found :(')
     dict_['film_detail'] = film
     return render(request, 'detail.html', context=dict_)
+
+
+def director_films_view(request, director_id):
+    dict_ = {}
+    try:
+        director = Director.objects.get(id=director_id)
+    except Director.DoesNotExist:
+        raise Http404('Director not found :(')
+    dict_['director'] = director
+    dict_['directors'] = Director.objects.all()
+    return render(request, 'director.html', context=dict_)
 
