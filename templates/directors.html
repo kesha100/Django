@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>All Directors</h1>
+    <br>
+    {% for director in directors %}
+    <h4>ʕ•́ᴥ•̀ʔっ{{ director }}</h4>
+        <hr>
+    {% endfor %}
+{% endblock %}

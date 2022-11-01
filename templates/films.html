@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>All Films</h1>
+<h1>All Films ʕ•́ᴥ•̀ʔっ</h1>
 {% for film in films_list %}
     <a href="/films/{{ film.id }}">
         <h3>Film: {{ film.title }}</h3>
     </a>
+        <h5>{{ film.producer }}</h5>
+        <h5>{{ film.rating }}</h5>
+        <h5>{{ film.duration }}</h5>
+
+
+    <hr>
 {% endfor %}
 {% endblock %}

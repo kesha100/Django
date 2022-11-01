@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<a href="/films/">
-    <button>BACK</button>
-</a>
+<a class="btn btn-warning" href="/films/" role="button">Back</a>
 <h1>Film: {{ film_detail.title }}</h1>
 <h2>Producer: {{ film_detail.producer }}</h2>
 <h3>Rating: {{ film_detail.rating }}</h3>
