@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Searched Films</h1>
+    {% for film in films %}
+        <h3>{{ film.title }}</h3></a>
+        <p>Director:{{ film.director }}<br>
+        Producer:{{ film.producer }}<br>
+        Rating:{{ film.rating}}<br>
+        Duration:{{ film.duration }}</p>
+    {% endfor %}
+{% endblock %}

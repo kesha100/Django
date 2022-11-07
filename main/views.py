@@ -7,6 +7,13 @@ from .models import Film, Director
 from .forms import CreateDirectorForm, CreateFilmForm, UserCreateForm, UserLoginForm
 
 
+def search_view(request):
+    search_word = request.GET.get('search_word')
+    context = {
+        'search_word': search_word,
+        'films': Film.objects.filter(title__icontains=search_word)
+    }
+    return render(request, 'search.html', context)
 
 
 
