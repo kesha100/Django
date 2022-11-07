@@ -30,4 +30,8 @@ urlpatterns = [
     path('director/<int:director_id>/films/', views.director_films_view),
     path('director/create/', views.create_director_view),
     path('films/create/', views.create_film_view),
+    path('register/', views.register_view),
+    path('login/', views.login_view),
+    path('logout/', views.logout_view),
+
 ]

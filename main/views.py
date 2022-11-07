@@ -1,8 +1,51 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 import datetime
 from .models import Film, Director
-from .forms import CreateDirectorForm, CreateFilmForm
+from .forms import CreateDirectorForm, CreateFilmForm, UserCreateForm, UserLoginForm
+
+
+
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
+
+
+def login_view(request):
+    context = {
+        'form': UserLoginForm()
+    }
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('/films/')
+            else:
+                return redirect('/login/')
+    return render(request, 'login.html', context)
+
+
+def register_view(request):
+    context = {
+        'form': UserCreateForm()
+    }
+    if request.method == 'POST':
+        form = UserCreateForm(request.POST)
+        if form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            User.objects.create_user(username=username, password=password)
+            return redirect('/')
+        context['form'] = form
+    return render(request, 'register.html', context)
 
 
 def create_director_view(request):
@@ -81,4 +124,5 @@ def director_films_view(request, director_id):
     dict_['director'] = director
     dict_['directors'] = Director.objects.all()
     return render(request, 'director_detail.html', context=dict_)
+
 
