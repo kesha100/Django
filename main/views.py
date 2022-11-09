@@ -16,7 +16,6 @@ def search_view(request):
     return render(request, 'search.html', context)
 
 
-
 def logout_view(request):
     logout(request)
     return redirect('/')
@@ -97,9 +96,22 @@ def date_now_view(request):
         return render(request, 'date_now.html', context)
 
 
+PAGE_SIZE = 3
+
+
 def films_list_view(request):
+    page = int(request.GET.get('page', 1))
+    all_films = Film.objects.all()
+    film_list = all_films[(page - 1) * PAGE_SIZE: page * PAGE_SIZE]
+    total = all_films.count()
+    pages_amount = total // PAGE_SIZE if total % PAGE_SIZE == 0 else total // PAGE_SIZE + 1
     films_list = {
-        'films_list': Film.objects.all(),
+        'films_list': film_list,
+        'buttons': [i for i in range(1, pages_amount + 1)],
+        'previous': page - 1,
+        'next': page + 1,
+        'page': page,
+        'pages_amount': pages_amount
     }
     return render(request, 'films.html', context=films_list)
 
